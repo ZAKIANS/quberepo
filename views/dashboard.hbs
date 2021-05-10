@@ -1,0 +1,87 @@
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <section>
+                    <div class="container">
+                        <div class="container mt-4 p-4 rounded text-light shadow" style="background-color:#0077be;">
+                            <h1 class="text-center"><b>Dashboard</b></h1>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <h4 class="mt-5">Total Products Uploaded: {{totalApk}}</h4>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <h4 class="mt-5">Total Products Downloads: {{downloads}}</h4>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="col-md-12 mt-2">
+                            <div class="container p-2">
+                                <table id="myTable" class="table table-bordered table-hover compact table-export"
+                                    cellspacing="0" width="100%">
+                                    <thead style="background-color:#0077be; color:white">
+                                        <tr>
+                                            <th>Sr#</th>
+                                            <th>Image</th>
+                                            <th>Title</th>
+                                            <th>Downloads</th>
+                                            <th>Created Date</th>
+                                            <th>File</th>
+                                            <th>Version</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each apk}}
+                                        {{!-- {{this}} --}}
+                                        <tr style="width:100%">
+                                            <td class="text-center" style="width:5%">
+                                           {{1}}  
+
+                                             </td>
+                                            <td class="center" style="width:10%">
+                                                <a href=""><img class="rounded"
+                                                        src="assets/images/RoundPhoto_Nov132020_051024.png" width="40"
+                                                        height="40" /></a>
+                                            </td>
+                                            <td style="width:15%">
+                                                {{title}}
+                                            </td>
+                                            <td style="width:15%">
+                                                {{downloads}}
+                                                </td>
+
+                                            <td style="width:15%">
+                                                {{{createdAt}}}
+                                            </td>
+                                            <td style="width:20%">
+                                                <a href="#">{{file}}</a>
+                                            </td>
+                                            <td style="width:10%">
+                                                {{version}} </td>
+
+                                            <td style="width:25%">
+                                                <label for="pending"> Pending</label>
+                                                <input type="radio" name="app-1" id="pending-1" onclick="setVal(0, 46)"
+                                                    value="0" checked>
+                                                <label for="checkA"> Approve</label>
+                                                <input type="radio" name="app-1" id="checkA-1" onclick="setVal(1, 46)"
+                                                    value="1">
+                                                <label for="checkR"> Reject</label>
+                                                <input type="radio" name="app-1" id="checkR-1" onclick="setVal(-1, 46)"
+                                                    value="-1">
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+        </div>
+        </section>
+        </main>

@@ -1,0 +1,49 @@
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <section>
+        <div class="container">
+
+            <div class="container mt-4 p-4  text-dark ">
+                <h1 class="text-center"><b>Profile</b></h1>
+
+                <div class="col-md-7 mx-auto bg-light p-3 rounded shadow">
+                    <form action="" method="post">
+
+                        <div class="mt-2 p-2">
+                            <label for=""> <b> Username</b> </label>
+                            <input  type="text" name="first_name" class="form-control" value={{{name}}}>
+                        </div>
+                        <div class=" mt-2 p-2">
+                            <label for=""> <b>Email</b> </label>
+                            <input type="email" name="user_name" class="form-control" value={{email}}>
+                        </div>
+                        <div class="mt-2 p-2">
+                            <label for=""><b>Current Password</b></label>
+                            <input type="password" name="CurrentPassword" class="form-control" >
+                        </div>
+                        <div class="mt-2 p-2">
+                            <label for=""><b>New Password</b></label>
+                            <input type="password" name="newPassword" class="form-control" >
+                        </div>
+
+
+
+                        <div class="mt-2 p-2">
+                            <input type="hidden" name="updateId" value="1">
+                            <input type="submit" name="submit" class="btn btn-primary float-right" value="Update">
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+
+
+
+</main>

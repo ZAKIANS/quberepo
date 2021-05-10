@@ -1,0 +1,56 @@
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <section>
+        <div class="container">
+
+
+            <div class="h1 mt-4">
+                Users List
+            </div>
+            <br>
+            <table id="myTable"
+                class="table table-bordered table-hover compact order-column table-condensed table-export mt-3"
+                cellspacing="0" width="100%">
+                <thead class="bg-info">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                      
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                    <tr>
+                        <td>
+                            1
+                        </td>                        
+                        <td>
+                            {{name}}
+                        </td>
+                        <td>
+                           {{email}}
+                            </td>
+
+                        <td>
+                            <a href="" class="btn btn-circle btn-danger">Delete</a>
+                        </td>
+                    </tr>
+
+                    {{/each}}
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+</main>
