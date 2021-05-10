@@ -30,7 +30,6 @@ app.get("/dashboard", catchAsync( async (req, res) => {
   let apk;
   let totalApk=0;
   let downloads=0;
-  
 if (role==='admin'){
   apk=await Apk.find().lean();
  downloads=apk.reduce((acc, current, index) => {
