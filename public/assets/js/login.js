@@ -6,7 +6,7 @@ function  login() {
     if (!name || !password) {
       return  alert("Please Enter Username and Password");
     }
-axios.post('http://localhost:8080/api/v1/user/signin',{
+axios.post('http://localhost:8080/user/signin',{
     "name":name,
     "password":password
 })
