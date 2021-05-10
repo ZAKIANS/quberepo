@@ -20,16 +20,22 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use("/user", userRouts);
-app.use("/apk", apkRouts);
+app.use("/api/v1/apk", apkRouts);
+// app.use('/static', express.static(path.join(__dirname, 'public')))
 
-// app.use('/static', express.static(path.join(__dirname, 'public')));
-
+app.get("/", (req, res) => {
+  res.render("signin",{layout:'logs'});
+});
+app.get("/signup", (req, res) => {
+  res.render("signup",{layout:'logs'});
+});
 app.use(authController.protect);
 app.get("/dashboard", catchAsync( async (req, res) => {
   const {name,role}=req.user;
   let apk;
   let totalApk=0;
   let downloads=0;
+  
 if (role==='admin'){
   apk=await Apk.find().lean();
  downloads=apk.reduce((acc, current, index) => {
