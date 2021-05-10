@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const url='https://qubanglestore.herokuapp.com/';
+const url='https://qubanglestore.herokuapp.com';
 const urls='http://localhost:8080';
 function  login() {
     const name=document.getElementById("inputUsername").value;
