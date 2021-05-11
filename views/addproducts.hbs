@@ -1,21 +1,18 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
   <section>
-
     <div class="app-content content my-4 ">
       <div class="content-wrapper">
         <div class="content-wrapper-before"></div>
-
         <div class="content-body">
           <!-- Basic form layout section start -->
           <section id="basic-form-layouts">
             <div class="row match-height">
-
               <div class="offset-md-1 col-md-10">
                 <div class="card">
                   <div class="card-content collapse show">
                     <div class="card-body">
 
-                      <form method="post" class="form" action="https://www.qubangelstore.com/admin/products/saveProduct"
+                      <form  class="form"   
                         enctype="multipart/form-data" accept-charset="ISO-8859-1">
                         <div class="form-body">
                           <h3 class="form-section"><b>
@@ -23,63 +20,46 @@
                           <br>
                           <div class="row">
                             <div class="col-md-6 form-group">
-                              <label for=""><b>Category</b></label>
-                              <select name="category_id" id="cat_id" onchange="setVal()" class="form-control">
+                              <label for="category" ><b>Category</b></label>
+                              <select  name="category_id"  name="category" id="cat_id" onchange="onCateSelect()" class="form-control">
                                 <option>Select Category...</option>
-                                <option value="1">
-                                  Application </option>
-                                <option value="2">
-                                  Games </option>
-                                <option value="3">
-                                  Health & Fitness </option>
-                                <option value="4">
-                                  Social Media </option>
-                                <option value="5">
-                                  New Releases </option>
-                                <option value="6">
-                                  Trending </option>
-                                <option value="7">
-                                  Family </option>
-                                <option value="8">
-                                  News </option>
-                                <option value="9">
-                                  Others </option>
+                              {{#each cate}}
+                                <option value={{this._id}} >
+                                  {{this.category}} 
+                                  </option>
+                                {{/each}}
+                                
                               </select>
                             </div>
-
                             <div class="col-md-6 form-group">
                               <label for=""><b>Sub-Category</b></label>
-                              <select name="sub_category" id="sub_category" class="form-control">
-
+                              <select name="sub_category"  id="subcategory" class="form-control" onchange="onsubCateSelect()">
+                                <option value=""> select ...</option>
                               </select>
                             </div>
 
                             <div class="col-md-6 form-group">
                               <label for=""><b>Title:</b></label>
-                              <input type="text" name="title" class="form-control" placeholder="Enter Title">
+                              <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
                             </div>
 
                             <div class="col-md-6 form-group">
                               <label for=""><b>Developer Name:</b></label>
-                              <input type="text" name="developer_name" class="form-control"
+                              <input type="text" id="developer" name="developer" class="form-control"
                                 placeholder="Enter Developer Name">
                             </div>
 
                             <div class="col-md-12 form-group">
                               <label for=""><b>Image:</b></label>
-                              <input type="file" name="image" class="form-control">
+                              <input type="file" id="image" name="image" class="form-control">
                             </div>
-
-
                             <div class="col-md-12 form-group">
                               <label for=""><b>Description</b>:</label>
-                              <textarea name="description" id="" cols="30" rows="5" class="form-control"></textarea>
+                              <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
                             </div>
-
-
                             <div class="col-md-6 form-group">
                               <label for=""><b>Version</b></label>
-                              <input type="text" id="" class="form-control" placeholder="Version" name="version">
+                              <input type="text" id="version" class="form-control" placeholder="Version" name="version">
                             </div>
 
                             <!-- <div class="col-md-6 form-group">
@@ -91,18 +71,14 @@
 
                             <div class="col-md-6 form-group">
                               <label for=""><b>Official Website</b></label>
-                              <input type="text" id="" class="form-control" placeholder="Official WebSite link"
+                              <input type="text" id="website" class="form-control" placeholder="Official WebSite link"
                                 name="official_web">
                             </div>
-
                             <div class="col-md-6 form-group">
                               <label for=""><b>Apk File</b></label>
-                              <input type="file" data-validation-allowing="apk" id="" name="file"
+                              <input type="file" id="file" data-validation-allowing="apk"  name="file"
                                 class="form-control-file">
                             </div>
-
-
-
                             <div class="col-md-2 form-group mt-2">
                               <label for="feature"><b>Editor's Choice</b></label>
                               <input type="checkbox" id="feature" class="" name="editor_choice" value="1">
@@ -133,7 +109,7 @@
                         </div>
 
                         <div class="form-actions">
-                          <button type="submit" class="btn btn-primary float-right">
+                          <button type="button" onclick="addApk()" class="btn btn-primary float-right">
                             <i class="la la-check-square-o"></i> Publish
                           </button>
                         </div>
@@ -148,7 +124,6 @@
 
             </div>
           </section>
-
           <!-- // Basic form layout section end -->
         </div>
       </div>

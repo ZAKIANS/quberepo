@@ -7,15 +7,12 @@
                 <div class="col-md-6 m-auto">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <label for="">Category Name:</label>
-                        <input type="text" name="category_name" class="form-control" placeholder="Enter Category Name"
+                        <input type="text" id="newCate" name="category_name" class="form-control" placeholder="Enter Category Name"
                             required>
-
-
                         <label for="">Slug:</label>
-                        <textarea name="slug" class="form-control" id="" cols="30" rows="5"></textarea>
-
+                        <textarea name="slug"  class="form-control" id="newSlug" cols="30" rows="5"></textarea>
                         <br>
-                        <input type="submit" name="submit" value="Submit" class="btn btn-success float-right">
+                        <input type="button"   onclick="addCate()" value="Submit" class="btn btn-success float-right">
                     </form>
                 </div>
             </div>

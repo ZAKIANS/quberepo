@@ -47,15 +47,19 @@ const apkSchema = new mongoose.Schema(
       type: String,
       required: [true, "apk developer name is required"],
     },
-    image: {
-      type: String,
-    },
+  
+  
     description: {
       type: String,
       required: [true, "apk description is required"],
     },
+    image: {
+      type: String,
+      required: [true, "apk image  is required"],
+    },
     version: {
       type: String,
+      default:'0.0.1'
     },
     downloads: {
       type: Number,
@@ -63,6 +67,7 @@ const apkSchema = new mongoose.Schema(
     },
     file: {
       type: String,
+      default:'No_file.apk'
     },
     officialWebsite: {
       type: String,

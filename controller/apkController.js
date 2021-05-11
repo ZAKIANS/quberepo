@@ -21,7 +21,17 @@ const fileFilter = (req, file, cb) => {
     cb(new AppError("No apk! Please upload only apk file", 400), false);
   }
 };
-const imageStorage = multer.memoryStorage();
+// const imageStorage = multer.memoryStorage();
+
+const imageStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/img/');
+  },
+  filename: (req, file, cb) => {
+    // req.body.image= `image-${req.user.id}-${Date.now()}.jpeg`;
+    cb(null, `image-${req.user.id}-${Date.now()}.jpeg`);
+  },
+});
 // validate for image
 const imageFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
@@ -41,7 +51,135 @@ const uploadImage = multer({
 
 exports.uploadImage=uploadImage.single('image');
 exports.uploadFile=uploadFile.single('file');
+exports.uploadFileHandler= catchAsync(async (req, res) => {
+  const filename=req.file? req.file.filename:'No_file.apk';
+  console.log({apk:req.file});
+   const title = req.params.title;
+const result=await Apk.findOneAndUpdate({title},{file:filename});
+   res.status(201).json({
+     data:result
+   });
+ });
+exports.addApk = catchAsync(async (req, res, next) => {
+  console.log({body:req.body,image:req.file});
+  const pre_register = req.body.pre_register == 'true';
+  const feature = req.body.feature == 'true';
+  const trending = req.body.trending == 'true';
+ const filename=req.file.filename;
+  const user = req.user;
+  const {
+    category,
+    subCategory,
+    title,
+    developer,
+    description,
+    version,
+    website,
+  } = req.body;
+  if (!title|| !filename) return next(new AppError("please enter complete detail", 404));
+  const apk = await Apk.create({
+    creator:req.user.name,
+    user,
+    version,
+    category,
+    subCategory,
+    title,
+    developer,
+    image:filename,
+    description,
+    officialWebsite:website,
+    editorChoice:feature,
+    trending:trending,
+    rapsodyApk:pre_register
+  });
+  res.status(201).json({
+    data: apk,
+  });
+});
 
+
+exports.getAllApk = catchAsync(async (req, res) => {
+  const allApk = await Apk.find();
+  res.status(201).json({
+    data: allApk,
+  });
+});
+exports.updateActions = catchAsync(async (req, res) => {
+  console.log(req.file);
+
+   await Apk.findOneAndUpdate(
+    { title: req.body.title },
+    { actions: req.body.actions }
+  );
+  const updatedApk=await Apk.findOne(
+    { title: req.body.title }
+  );
+  res.status(201).json({
+    data: updatedApk,
+  });
+});
+
+exports.addCategory = catchAsync(async (req, res) => {
+  const {category,slug}=req.body;
+  await Category.create({
+    category,
+    slug
+  });
+  const allCate = await Category.find();
+  res.status(201).json({
+    data: allCate,
+  });
+
+  // const apk = await Category.findOne({ "category.name": "games" });
+  // console.log(apk);
+  // const [...subCate] = apk.category.subCategory;
+  // subCate.push("Fun");
+  // const result = await Category.findByIdAndUpdate(apk._id, {
+  //   "category.subCategory": subCate,
+  // // });
+  // const apk = await Category.find();
+  // const names = apk.map((e) => e.category.name);
+});
+
+exports.addSubCategory = catchAsync(async (req, res) => {
+  const { cate, newSubCate } = req.params;
+  console.log(req.params);
+  const category = await Category.findOne({ category: cate });
+  category.subCategory.push(newSubCate);
+  console.log(category);
+  console.log(req.params);
+  await Category.findByIdAndUpdate(category._id, {
+    subCategory: category.subCategory,
+  });
+  const allCate = await Category.find();
+  res.status(201).json({
+    data: allCate,
+  });
+});
+
+exports.removeCategory = catchAsync(async (req, res) => {
+  const cate = req.params.cate;
+  await Category.findOneAndRemove({ category: cate });
+  const allCate = await Category.find();
+  res.status(201).json({
+    data: allCate,
+  });
+});
+exports.getAllCate = catchAsync(async (req, res) => {
+  const data = await Category.find();
+  res.status(200).json({ data });
+});
+
+exports.getcategory = catchAsync(async (req, res) => {
+const id=req.body.id;
+  const data = await Category.findOne({id});
+  console.log(id);
+  console.log('///////////////////////////');
+  console.log(data);
+  res.status(200).json({ data });
+});
+
+// multiple files uploads
 // const multerStorage = multer.memoryStorage();
 // const multerFilter = (req, file, cb) => {
 //   if (file.mimetype.startsWith('image')||file.mimetype.startsWith('application') ) {
@@ -90,112 +228,54 @@ exports.uploadFile=uploadFile.single('file');
 //   next();
 // });
 
-exports.addApk = catchAsync(async (req, res, next) => {
- const filename=req.file? req.file.filename:'No_file.apk';
-  const user = req.user;
-  const {
-    category,
-    subCategory,
-    title,
-    developer,
-    image,
-    description,
-    version,
-    officialWebsite,
-    editorChoice,
-    trending,
-    rapsodyApk,
-  } = req.body;
-  if (!title) return next(new AppError("please enter complete detail", 404));
-  const apk = await Apk.create({
-    creator:req.user.name,
-    user,
-    category,
-    subCategory,
-    title,
-    developer,
-    image,
-    description,
-    version,
-    officialWebsite,
-    editorChoice,
-    trending,
-    rapsodyApk,
-    file:filename
-  });
-  res.status(201).json({
-    data: apk,
-  });
-});
+/////////////////
 
+// const multerStorage = multer.memoryStorage();
 
-exports.getAllApk = catchAsync(async (req, res) => {
-  const allApk = await Apk.find();
-  res.status(201).json({
-    data: allApk,
-  });
-});
-exports.updateActions = catchAsync(async (req, res) => {
-  console.log(req.file);
+// const multerFilter = (req, file, cb) => {
+//   if (file.mimetype.startsWith("image") || file.mimetype.startsWith("application")) {
+//     cb(null, true);
+//   } else {
+//     cb("Please upload only image or apks", false);
+//   }
+// };
 
-   await Apk.findOneAndUpdate(
-    { title: req.body.title },
-    { actions: req.body.actions }
-  );
-  const updatedApk=await Apk.findOne(
-    { title: req.body.title }
-  );
-  res.status(201).json({
-    data: updatedApk,
-  });
-});
+// const upload = multer({
+//   storage: multerStorage,
+//   fileFilter: multerFilter
+// });
+// const uploadFiles = upload.array("images", 10); // limit to 10 images
+// const uploadImages = (req, res, next) => {
+//   uploadFiles(req, res, err => {
+//     if (err instanceof multer.MulterError) { // A Multer error occurred when uploading.
+//       if (err.code === "LIMIT_UNEXPECTED_FILE") { // Too many images exceeding the allowed limit
+// console.log(err);      }
+//     } else if (err) {
+//       console.log(err); 
+//       // handle other errors
+//     }
 
-exports.addCategory = catchAsync(async (req, res) => {
-  const newCate = req.params.newCate;
-  await Category.create({
-    category: newCate,
-  });
-  const allCate = await Category.find();
-  res.status(201).json({
-    data: allCate,
-  });
+//     // Everything is ok.
+//     next();
+//   });
+// };
+// const resizeImages = async (req, res, next) => {
+//   if (!req.files) return next();
+//   req.body.images = [];
+//   await Promise.all(
+//     req.files.map(async file => {
+//       const newFilename = ...;
 
-  // const apk = await Category.findOne({ "category.name": "games" });
-  // console.log(apk);
-  // const [...subCate] = apk.category.subCategory;
-  // subCate.push("Fun");
-  // const result = await Category.findByIdAndUpdate(apk._id, {
-  //   "category.subCategory": subCate,
-  // // });
-  // const apk = await Category.find();
-  // const names = apk.map((e) => e.category.name);
-});
+//       await sharp(file.buffer)
+//         .resize(640, 320)
+//         .toFormat("jpeg")
+//         .jpeg({ quality: 90 })
+//         .toFile(`upload/${newFilename}`);
 
-exports.addSubCategory = catchAsync(async (req, res) => {
-  const { cate, newSubCate } = req.params;
-  console.log(req.params);
-  const category = await Category.findOne({ category: cate });
-  category.subCategory.push(newSubCate);
-  console.log(category);
-  console.log(req.params);
-  await Category.findByIdAndUpdate(category._id, {
-    subCategory: category.subCategory,
-  });
-  const allCate = await Category.find();
-  res.status(201).json({
-    data: allCate,
-  });
-});
+//       req.body.images.push(newFilename);
+//     })
+//   );
 
-exports.removeCategory = catchAsync(async (req, res) => {
-  const cate = req.params.cate;
-  await Category.findOneAndRemove({ category: cate });
-  const allCate = await Category.find();
-  res.status(201).json({
-    data: allCate,
-  });
-});
-exports.getAllCate = catchAsync(async (req, res) => {
-  const data = await Category.find();
-  res.status(200).json({ data });
-});
+//   next();
+// };
+/////////////////
