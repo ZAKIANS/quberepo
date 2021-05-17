@@ -15,7 +15,7 @@ Router.get("/editsubcategory", viewController.editsubcategory);
 Router.get("/home", viewController.home);
 Router.get("/category", viewController.category);
 Router.get("/addslider", viewController.addslider);
-Router.get("/addproducts", viewController.addproducts);
+Router.get("/addproduct", viewController.addproducts);
 Router.get("/addcategory", viewController.addcategory);
 // Router.get("/profile", viewController.);
 

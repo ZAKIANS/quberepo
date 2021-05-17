@@ -2,7 +2,6 @@ const Apk = require("../models/apkModel");
 const Category = require("../models/categoryModel");
 const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
-
 exports.signin= (req, res) => {
     res.render("signin",{layout:'logs'});
   };
@@ -38,8 +37,6 @@ exports.signin= (req, res) => {
   else if(role==='user') products=await Apk.find({creator:name}).lean();
     res.render("products",{products});
   });
-
-  
 exports.home=catchAsync(async (req, res) => {
     res.render("home");
   });
@@ -69,7 +66,8 @@ exports.home=catchAsync(async (req, res) => {
   });
 
   exports.addSubcategory=catchAsync(async (req, res) => {
-    res.render("addsubcategory");
+    const cate=await Category.find().lean();
+    res.render("addsubcategory",{cate});
   });
   exports.editsubcategory=catchAsync(async (req, res) => {
     res.render("editsubcategory");

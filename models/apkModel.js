@@ -61,17 +61,18 @@ const apkSchema = new mongoose.Schema(
       type: String,
       default:'0.0.1'
     },
+    images:[String],
     downloads: {
       type: Number,
       default: 0,
-    },
+    }, 
     file: {
       type: String,
       default:'No_file.apk'
     },
     officialWebsite: {
       type: String,
-      required: [true, "apk officialWebsite is required"],
+      required: [false, "apk officialWebsite is required"],
     },
   },
   {

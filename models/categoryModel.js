@@ -8,8 +8,12 @@ const categorySchema = new mongoose.Schema({
   slug: {
     type: String,
     required: true,
+  }, 
+  static: {
+    type: Boolean,
+    default: false,
   },
-  subCategory: [String],
+  subCategory: [{name:String, image:String,slug:String}],
 });
 const Category = mongoose.model("Category", categorySchema);
 module.exports = Category;
