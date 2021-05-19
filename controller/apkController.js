@@ -4,6 +4,8 @@ const Category = require("../models/categoryModel");
 const Apk = require("../models/apkModel");
 const multer = require("multer");
 const path=require('path');
+// var public = path.join(__dirname, '../public/apk/');
+
 
 // multiple files uploads
 const multipleImagesStorage = multer.diskStorage({
@@ -151,6 +153,25 @@ exports.getAllApk = catchAsync(async (req, res) => {
 exports.allApprovedApk= catchAsync(async (req, res) => {
   const allApk = await Apk.find({actions:'approved'});
   res.status(201).json({
+  data: allApk,
+  });
+});
+exports.getApk= catchAsync(async (req, res) => {
+  const apk = await Apk.findOne({actions:'approved',title:req.params.title});
+  res.status(200).json({
+    data: apk,
+  });
+});
+exports.getSameCateApps=catchAsync(async (req, res) => {
+  const apk = await Apk.find({actions:'approved',subCategory:req.params.cate});
+  res.status(200).json({
+    data: apk,
+  });
+});
+exports.papularApks= catchAsync(async (req, res) => {
+  const allApk = await Apk.find({actions:'approved',createdAt: { $gt: new Date(Date.now() - 24*60*60 * 1000) }});
+
+  res.status(201).json({
     data: allApk,
   });
 });
@@ -231,11 +252,13 @@ exports.getStates = catchAsync(async (req, res) => {
 });
 exports.getDownload=catchAsync(async (req, res) => {
   const {title}=req.params;
-console.log({title});
+// console.log({title});
 const {file,downloads} = await Apk.findOne({title});
 await Apk.findOneAndUpdate({title},{downloads:downloads+1})
-  const readyFile =`public/apk/${file}`;
-  res.download(readyFile);
+  const readyFile = path.join(__dirname, `../public/apk/${file}`);
+  // res.download(readyFile,'calculator.apk');
+  console.log('dowloaded');
+  res.sendFile(readyFile);
 });
 
 exports.getcategory = catchAsync(async (req, res) => {

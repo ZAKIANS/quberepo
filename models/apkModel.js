@@ -16,9 +16,10 @@ const apkSchema = new mongoose.Schema(
       required: [true, "please provide the transaction type"],
     },
     createdAt: {
-      type: String,
-      default:new Date().toDateString(),
+      type: Date,
+      default:new Date(),
     },
+    requirements:String,
     creator:String
     ,
     actions: {

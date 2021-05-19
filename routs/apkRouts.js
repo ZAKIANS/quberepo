@@ -3,8 +3,13 @@ const Router = express.Router();
 const apkController = require("../controller/apkController");
 const authController = require("../controller/authController");
 Router.get("/approved", apkController.allApprovedApk);
+Router.get("/papular", apkController.papularApks);
 Router.get("/getAllCate", apkController.getAllCate);
 Router.get("/download/:title", apkController.getDownload);
+Router.get("/:title", apkController.getApk);
+// here cate means subCate
+Router.get("/samecate/:cate", apkController.getSameCateApps);
+
 
 Router.use(authController.protect);
 Router.post(

@@ -98,9 +98,9 @@
             <th scope="col" style="width:10%">
               Date
             </th>
-            {{!-- <th scope="col" style="width:20%">
+            {{! <th scope="col" style="width:20%">
               File
-            </th> --}}
+            </th> }}
             <th scope="col" style="width:5%">
               Downloads
             </th>
@@ -131,7 +131,7 @@
               </td>
               <td>
                 {{createdAt}}
-                </td>
+              </td>
               {{!-- <td>
                 <a href="#">{{file}}</a>
               </td> --}}
@@ -139,10 +139,24 @@
                 {{{downloads}}}
               </td>
 
+              <td style="width:25%">
+                <form id="status" name="status">
+                  <label for="pending">Pending</label>
+  <input id="pending" value="aa" type="radio" name="pending"/>
+                    <label for="approved">Approved</label>
+  <input id="approved" value="bb" type="radio" name="approved"/>
+                    <label for="rejected">Rejected</label>
+  <input id="rejected" value="cc" type="radio" name="rejected" checked/>
+</form>
+              </td>
+
               <td>
                 <div class="d-flex flex-row bd-highlight my-1">
-                  <p  class="btn mr-2 btn-circle btn-warning">Edit </p>
-                   <a   id="deleteItem" class="btn btn-circle btn-danger mb-2 text-white">Delete</a>
+                  <p class="btn mr-2 btn-circle btn-warning">Edit </p>
+                  <a
+                    id="deleteItem"
+                    class="btn btn-circle btn-danger mb-2 text-white"
+                  >Delete</a>
                 </div>
               </td>
             </tr>
@@ -155,5 +169,10 @@
 
 </div>
 <!-- /main content -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" defer></script>
-        <script src="assets/js/products.js" defer></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+  integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+  crossorigin="anonymous"
+  defer
+></script>
+<script src="assets/js/products.js" defer></script>
