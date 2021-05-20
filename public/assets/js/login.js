@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-// const url='https://qubanglestore.herokuapp.com';
+const url='https://qubanglestore.herokuapp.com';
 let g_category;
 let files=[];//This is multiple images 
 let g_subCategory;
-const url = "http://localhost:8080";
+// const url = "http://localhost:8080";
 function login() {
   const name = document.getElementById("inputUsername").value;
   const password = document.getElementById("inputPassword").value;
