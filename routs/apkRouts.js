@@ -9,6 +9,8 @@ Router.get("/download/:title", apkController.getDownload);
 Router.get("/:title", apkController.getApk);
 // here cate means subCate
 Router.get("/samecate/:cate", apkController.getSameCateApps);
+Router.get("/trending", apkController.getTrending);
+
 
 
 Router.use(authController.protect);

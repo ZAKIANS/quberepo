@@ -168,6 +168,13 @@ exports.getSameCateApps=catchAsync(async (req, res) => {
     data: apk,
   });
 });
+exports.getTrending=catchAsync(async (req, res) => {
+  const apk = await Apk.find({actions:'approved',trending:true});
+  console.log({apk});
+  res.status(200).json({
+    data: apk,
+  });
+});
 exports.papularApks= catchAsync(async (req, res) => {
   const allApk = await Apk.find({actions:'approved',createdAt: { $gt: new Date(Date.now() - 24*60*60 * 1000) }});
 
