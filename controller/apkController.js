@@ -45,7 +45,7 @@ const fileStorage = multer.diskStorage({
     cb(null, "public/apk/");
   },
   filename: (req, file, cb) => {
-    cb(null, `apk-${req.user.id}-${Date.now()}.apk`);
+    cb(null, `apk-${Date.now()}-${file.originalname}`);
   },
 });
 
@@ -106,7 +106,7 @@ exports.uploadImagesHandler = catchAsync(async (req, res) => {
 });
 
 exports.addApk = catchAsync(async (req, res, next) => {
-  console.log({ body: req.body, image: req.file });
+console.log({ body: req.body, image: req.file });
   const pre_register = req.body.pre_register == "true";
   const feature = req.body.feature == "true";
   const trending = req.body.trending == "true";
@@ -168,16 +168,14 @@ exports.getSameCateApps=catchAsync(async (req, res) => {
     data: apk,
   });
 });
-exports.getTrending=catchAsync(async (req, res) => {
+exports.trendingApks=catchAsync(async (req, res) => {
   const apk = await Apk.find({actions:'approved',trending:true});
-  console.log({apk});
   res.status(200).json({
     data: apk,
   });
 });
 exports.papularApks= catchAsync(async (req, res) => {
   const allApk = await Apk.find({actions:'approved',createdAt: { $gt: new Date(Date.now() - 24*60*60 * 1000) }});
-
   res.status(201).json({
     data: allApk,
   });

@@ -3,27 +3,15 @@ const Router = express.Router();
 const apkController = require("../controller/apkController");
 const authController = require("../controller/authController");
 Router.get("/approved", apkController.allApprovedApk);
+Router.get("/trend", apkController.trendingApks);
 Router.get("/papular", apkController.papularApks);
 Router.get("/getAllCate", apkController.getAllCate);
 Router.get("/download/:title", apkController.getDownload);
 Router.get("/:title", apkController.getApk);
 // here cate means subCate
 Router.get("/samecate/:cate", apkController.getSameCateApps);
-Router.get("/trending", apkController.getTrending);
-
-
-
 Router.use(authController.protect);
-Router.post(
-  "/addApk",
-  // apkController.uploadMultiFiles.fields([
-  //   { name: "image", maxCount: 1 },
-  //   { name: "images", maxCount: 5 }
-  // ]),
-  // apkController.resizeImages,
-  apkController.uploadImage,
-  apkController.addApk
-);
+Router.post("/addApk", apkController.uploadImage, apkController.addApk);
 Router.patch(
   "/addApkFile/:title",
   apkController.uploadFile,
@@ -32,7 +20,7 @@ Router.patch(
 
 Router.patch(
   "/addApkImages/:title",
-  apkController.uploadMultiImages.array("images", 5),
+  apkController.uploadMultiImages.array("images", 10),
   apkController.saveImages,
   apkController.uploadImagesHandler
 );

@@ -157,16 +157,20 @@ console.log("we are adding apks");
   // formData.append("website", website);
   formData.append("image", image);
  try {
-     await axios.post(`${url}/apk/addApk`, formData);
-    const fileData = new FormData();
-    fileData.append("file", file);
-     await axios.patch(`${url}/apk/addApkFile/${title}`,fileData);
+    const rs1= await axios.post(`${url}/apk/addApk`, formData);
+    console.log({rs1});
     const fd = new FormData();
     var ins =files.length;
 for (var x = 0; x < ins; x++) {
     fd.append("images", files[x]);
 }
- await axios.patch(`${url}/apk/addApkImages/${title}`,fd);
+const rs2=  await axios.patch(`${url}/apk/addApkImages/${title}`,fd);
+console.log({rs2});
+ const fileData = new FormData();
+ fileData.append("file", file);
+ const rs3= await axios.patch(`${url}/apk/addApkFile/${title}`,fileData);
+ console.log({rs3});
+
     // console.log({result,datas});
     window.location='/products';
   } catch (error) {
