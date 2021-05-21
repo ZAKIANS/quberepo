@@ -48,5 +48,8 @@ ${this.slug}
 `;
   return newRow;
 });
+hbr.registerHelper("title", function(title) {
+  return title+".uppercase();"
+});
 
 module.exports = app;

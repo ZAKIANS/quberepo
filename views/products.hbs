@@ -69,7 +69,6 @@
 
   <section>
     <div class="container">
-
       <div class="h1 mt-4">
         Apk List
       </div>
@@ -156,8 +155,10 @@
                 <div class="d-flex flex-row bd-highlight my-1">
                   <p class="btn mr-2 btn-circle btn-warning">Edit </p>
                   <a
-                    id="deleteItem"
-                    class="btn btn-circle btn-danger mb-2 text-white"
+                    {{!-- id={{title}} --}}
+                    class="btn btn-circle btn-danger mb-2 text-white delete"
+                    title={{this.title}}
+                    {{!-- name={{title}} --}}
                   >Delete</a>
                 </div>
               </td>

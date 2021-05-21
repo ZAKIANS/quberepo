@@ -107,11 +107,13 @@ exports.uploadImagesHandler = catchAsync(async (req, res) => {
 
 exports.addApk = catchAsync(async (req, res, next) => {
 console.log({ body: req.body, image: req.file });
+const user = req.user;
+
+  const actions=user.role=='admin'? 'approved':'pending'
   const pre_register = req.body.pre_register == "true";
   const feature = req.body.feature == "true";
   const trending = req.body.trending == "true";
   const filename = req.file.filename;
-  const user = req.user;
   const {
     category,
     subCategory,
@@ -126,6 +128,7 @@ console.log({ body: req.body, image: req.file });
     return next(new AppError("please enter complete detail", 404));
   const apk = await Apk.create({
     creator: req.user.name,
+    actions,
     user,
     version,
     category,
