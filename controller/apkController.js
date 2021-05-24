@@ -106,17 +106,20 @@ exports.uploadImagesHandler = catchAsync(async (req, res) => {
 });
 
 exports.addApk = catchAsync(async (req, res, next) => {
-console.log({ body: req.body, image: req.file });
+// console.log({ body: req.body, image: req.file });
 const user = req.user;
 
-  const actions=user.role=='admin'? 'approved':'pending'
-  const pre_register = req.body.pre_register == "true";
+  const actions=user.role=='admin'? 'approved':'pending';
+  const hot = req.body.hot == "true";
+  const top = req.body.top == "true";
   const feature = req.body.feature == "true";
   const trending = req.body.trending == "true";
   const filename = req.file.filename;
   const {
+    requirements,
     category,
     subCategory,
+    tags,
     title,
     developer,
     description,
@@ -133,14 +136,17 @@ const user = req.user;
     version,
     category,
     subCategory,
+    requirements,
     title,
+    tags,
     developer,
     image: filename,
     description,
+    hot,
     officialWebsite: website,
     editorChoice: feature,
     trending: trending,
-    rapsodyApk: pre_register,
+    top,
   });
   res.status(201).json({
     data: apk,
@@ -166,6 +172,7 @@ exports.getApk= catchAsync(async (req, res) => {
   });
 });
 exports.getSameCateApps=catchAsync(async (req, res) => {
+  console.log({cate:req.params.cate});
   const apk = await Apk.find({actions:'approved',subCategory:req.params.cate});
   res.status(200).json({
     data: apk,
@@ -224,8 +231,8 @@ exports.addCategory = catchAsync(async (req, res) => {
   // const apk = await Category.find();
   // const names = apk.map((e) => e.category.name);
 });
-
 exports.addSubCategory = catchAsync(async (req, res) => {
+  console.log(req.body);
   const { cate } = req.params;
   const { slug, subCate } = req.body;
   const filename = req.file.filename;

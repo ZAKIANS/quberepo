@@ -94,9 +94,9 @@
             <th scope="col" style="width:15%">
               Category
             </th>
-            <th scope="col" style="width:10%">
+            {{! <th scope="col" style="width:10%">
               Date
-            </th>
+            </th> }}
             {{! <th scope="col" style="width:20%">
               File
             </th> }}
@@ -130,34 +130,53 @@
               <td>
                 {{category}}
               </td>
-              <td>
+              {{!-- <td>
                 {{createdAt}}
-              </td>
+              </td> --}}
               {{!-- <td>
                 <a href="#">{{file}}</a>
               </td> --}}
               <td>
                 {{{downloads}}}
               </td>
-
               <td style="width:25%">
-                <form id="status" name="status">
-                  <label for="pending">Pending</label>
-  <input id="pending" value="aa" type="radio" name="pending"/>
+                {{#if admin.role}}
+                  {{log "me" :this}}
+                  <form id="status" name="status">
+                    <label for="pending">Pending</label>
+                    <input
+                      id="pending"
+                      value="aa"
+                      type="radio"
+                      name="pending"
+                    />
                     <label for="approved">Approved</label>
-  <input id="approved" value="bb" type="radio" name="approved"/>
+                    <input
+                      id="approved"
+                      value="bb"
+                      type="radio"
+                      name="approved"
+                    />
                     <label for="rejected">Rejected</label>
-  <input id="rejected" value="cc" type="radio" name="rejected" checked/>
-</form>
+                    <input
+                      id="rejected"
+                      value="cc"
+                      type="radio"
+                      name="rejected"
+                      checked
+                    />
+                  </form>
+                {{else}}
+                  <p>{{actions}}</p>
+                {{/if}}
               </td>
-
               <td>
                 <div class="d-flex flex-row bd-highlight my-1">
-                  <p class="btn mr-2 btn-circle btn-warning">Edit </p>
+                  <p class="btn mr-2 btn-circle user_word_list_item btn-warning">Edit </p>
                   <a
+                    class="btn  btn-circle downs btn-danger mb-2 text-white delete"
+                    title={{title}}
                     {{!-- id={{title}} --}}
-                    class="btn btn-circle btn-danger mb-2 text-white delete"
-                    title={{this.title}}
                     {{!-- name={{title}} --}}
                   >Delete</a>
                 </div>
@@ -169,7 +188,6 @@
     </div>
   </section>
   <!--Contant Area-->
-
 </div>
 <!-- /main content -->
 <script

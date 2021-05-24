@@ -79,8 +79,6 @@
                               <i class="ft-flag"></i>Add Apks</b></h3>
                           <br>
                           <div class="row">
-                           
-  
                             <div class="col-md-6 form-group">
                               <label for=""><b>Title:</b></label>
                               <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
@@ -102,16 +100,13 @@
 								<input id="file-input" type="file" name="image" class="form-control" multiple>
 								<div class="m-1 p-1"  id="preview"></div>
 							  </div>
-  
-  
                             <div class="col-md-12 form-group">
                                <label for=""><b>Description</b>:</label>
                               <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
                           </div>
-
 							<div class="col-md-6 form-group">
-								<label for=""><b>Tage:</b></label>
-								<input type="text" name="tage" class="form-control"
+								<label for=""><b>Tags:</b></label>
+								<input type="text" name="tag" id="tags" class="form-control"
 								  placeholder="Enter tags">
 							  </div>
 
@@ -131,26 +126,13 @@
                                 {{/each}}
                               </select>
               </div>
-	
 							  <div class="col-md-6 form-group">
 								 <label for=""><b>Sub-Category</b></label>
                               <select name="sub_category"  id="subcategory" class="form-control" onchange="onsubCateSelect()">
                                 <option value=""> select ...</option>
                               </select>
 							  </div>
-  
-  
-                            <div class="col-md-6 form-group">
-                              <label for=""><b>Publish Date</b></label>
-                              <input type="date" id="" class="form-control" value="2021-05-02 05:59:22" placeholder="Publish Date"
-                                name="publish_date">
-                            </div>
-  
-  
-                        
-  
-                            
-
+                           
                             <div class="col-md-6 form-group">
                               <label for=""><b>Apk File</b></label>
                               <input type="file" id="file" data-validation-allowing="apk"  name="file"
@@ -158,18 +140,10 @@
                            </div>
 
 							<div class="col-md-6 form-group">
-								<label for=""><b>App Uploaded By</b></label>
-								<input type="text" id="" class="form-control" placeholder="Enter Uploader Name" name="upload">
-							  </div>
-  
-
-							<div class="col-md-6 form-group">
-								<label for=""><b>Requirnments</b></label>
-								<input type="text" id="" class="form-control" placeholder="Enter Requirnments"
+								<label for=""><b>Requirements</b></label>
+								<input type="text" id="requirements" class="form-control" placeholder="Enter Requirnments"
 								  name="official_web">
 							  </div>
-  
-  
                             <div class="col-md-3 form-group mt-2">
                                <label for="feature"><b>Editor's Choice</b></label>
                               <input type="checkbox" id="feature" class="" name="editor_choice" value="1">
@@ -179,8 +153,12 @@
                               <input type="checkbox" id="trending" class="" name="trending" value="1">
                            </div>
                            <div class="col-md-2 form-group mt-2">
-                              <label for="pre_register"><b>Rapsody Apk</b></label>
-                              <input type="checkbox" id="pre_register" class="" name="pre_register" value="1">
+                              <label for="pre_register"><b>Hot</b></label>
+                              <input type="checkbox" id="hot" class="" name="pre_register" value="1">
+                            </div>
+                          <div class="col-md-2 form-group mt-2">
+                              <label for="pre_register">Top (App & Game)</label>
+                            <input type="checkbox" id="top" class="" name="pre_register" value="1">
                             </div>
   
                             <!-- <div class="col-md-12 form-group">

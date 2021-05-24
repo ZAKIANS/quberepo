@@ -19,6 +19,8 @@ exports.signin= (req, res) => {
     totalApk=index+1;
    return acc+=current.downloads;
    },0);
+   res.render("dashboard",{apk,downloads,totalApk});
+
   }
   else if(role==='user') {
     apk=await Apk.find({creator:name}).lean();
@@ -26,16 +28,22 @@ exports.signin= (req, res) => {
       totalApk=index+1;
      return acc+=current.downloads;
      },0);
+     res.render("userdashboard",{apk,downloads,totalApk});
      }
-    res.render("dashboard",{apk,downloads,totalApk});
   });
 
   exports.products= catchAsync( async (req, res) => {
     const {name,role}=req.user;
     let products;
-  if (role==='admin') products=await Apk.find().lean();
-  else if(role==='user') products=await Apk.find({creator:name}).lean();
-    res.render("products",{products});
+    let admin={role:false};
+  if (role==='admin'){
+    products=await Apk.find().lean();
+    admin.role=true;
+  } 
+  else if(role==='user'){
+    products=await Apk.find({creator:name}).lean();
+  } 
+    res.render("products",{products,admin});
   });
 exports.home=catchAsync(async (req, res) => {
     res.render("home");

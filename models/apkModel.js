@@ -17,11 +17,10 @@ const apkSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default:new Date(),
+      default: new Date(),
     },
-    requirements:String,
-    creator:String
-    ,
+    requirements: String,
+    creator: String,
     actions: {
       type: String,
       enum: ["pending", "approved", "rejected"],
@@ -35,9 +34,17 @@ const apkSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    rapsodyApk: {
+    hot: {
       type: Boolean,
       default: false,
+    },
+    top: {
+      type: Boolean,
+      default: false,
+    },
+    updateAt: {
+      type: String,
+      default: new Date(),
     },
     title: {
       type: String,
@@ -48,8 +55,7 @@ const apkSchema = new mongoose.Schema(
       type: String,
       required: [true, "apk developer name is required"],
     },
-  
-  
+
     description: {
       type: String,
       required: [true, "apk description is required"],
@@ -60,16 +66,17 @@ const apkSchema = new mongoose.Schema(
     },
     version: {
       type: String,
-      default:'0.0.1'
+      default: "0.0.1",
     },
-    images:[String],
+    tags:String,
+    images: [String],
     downloads: {
       type: Number,
       default: 0,
-    }, 
+    },
     file: {
       type: String,
-      default:'No_file.apk'
+      default: "No_file.apk",
     },
     officialWebsite: {
       type: String,

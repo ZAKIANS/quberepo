@@ -8,6 +8,9 @@ Router.get("/papular", apkController.papularApks);
 Router.get("/getAllCate", apkController.getAllCate);
 Router.get("/download/:title", apkController.getDownload);
 Router.get("/:title", apkController.getApk);
+Router.get("/getcategory/:category", apkController.getcategory);
+
+
 // here cate means subCate
 Router.get("/samecate/:cate", apkController.getSameCateApps);
 Router.use(authController.protect);
@@ -32,7 +35,6 @@ Router.get("/states", apkController.getStates);
 Router.delete("/deleteApk/:title", apkController.deleteApk);
 Router.patch("/updateActions", apkController.updateActions);
 Router.post("/addCate", apkController.addCategory);
-Router.get("/getcategory/:category", apkController.getcategory);
 
 Router.patch(
   "/addSubCate/:cate",

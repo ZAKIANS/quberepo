@@ -86,8 +86,8 @@
                    {{#each cate}}
                     <tr>
                         <td>
-                            1 </td>
-
+                            1 							
+						</td>
                         <td>
                             {{this.category}}
                         </td>
@@ -97,14 +97,12 @@
                         <td class="text-right">
                              {{#if this.static}}
                              {{else}}
-                                     <a   id="deleteItem" class="btn m-2 btn-circle btn-danger">Delete
+                                <a   id="deleteItem" class="btn m-2 btn-circle btn-danger">Delete
                              {{/if}}
-                            <a href="addsubcategory" class="btn btn-circle btn-primary">Add SubCategory</a>
-
+                            <a href="/addsubcategory?cate={{this.category}}" class="btn btn-circle btn-primary">Add SubCategory</a>
                         </td>
                     </tr>
                     {{/each}}
-
             </tbody>
         </table>
 

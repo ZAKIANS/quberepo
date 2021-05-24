@@ -4,6 +4,8 @@ const AppError = require("../utils/appError");
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
 const Email = require("../utils/email");
+const app = require("../app");
+
 const signToken = (user) => {
   const { name, role, email, _id: id } = user;
   return jwt.sign(
@@ -41,6 +43,7 @@ const createAndSendToken = (user, statusCode, res) => {
   user.password = undefined;
   // res.header('x-token', token)
   //   .header('access-control-expose-headers', 'x-token')
+  if (app.locals)  app.locals.user = user;
   res.status(statusCode).json({
     status: "success",
     token,

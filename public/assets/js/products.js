@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 
-const ss=document.querySelectorAll('.delete')
+const ss=document.querySeplectorAll('.delete')
 
 ss.forEach(e=>console.log(e.title));
 
 console.log({ss});
+
     // const title=event.target.firstElementChild.innerHTML;
     // try {
     //     const data = await axios.delete(`${url}/apk/deleteApk/${{title}}`);
@@ -12,3 +15,16 @@ console.log({ss});
     //   } catch (error) {
     //     console.log(error);
     //   }
+    // $(document).on('click', '.user_word_list_item', function(event) {
+    //     event.preventDefault();
+    //     console.log('worked!');
+    //   });
+    function addEvent(){
+      document.getElementsByClassName('downs').addEventListener('click',(e)=>{
+        e.preventDefault();
+        console.log(e.target);
+        // window.location = '/ProductDetails.html?title=' +e.target.title;
+      })
+
+    }
+    
