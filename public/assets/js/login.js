@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 const url='https://qubanglestore.herokuapp.com';
+// const url='https://store.webzeco.com';
+
 let g_category;
 let files = []; //This is multiple images
 let g_subCategory;
@@ -29,38 +31,42 @@ function login() {
       }
     );
 }
-document.getElementById('c_ups').addEventListener('submit',(e)=> {
-  e.preventDefault();
-  console.log({name:'tets'});
+const sings=document.getElementById('c_ups');
+if (sings) {
+  sings.addEventListener('submit',(e)=> {
+    e.preventDefault();
+    console.log({name:'tets'});
+  
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("confirmPassword").value;
+    if (!username || !email || !passwordConfirm || !password) {
+      return alert("Please Enter complete information!!!");
+    }
+    axios
+      .post(`${url}/user/signup`, {
+       name: username,
+        email,
+        password,
+        passwordConfirm,
+      })
+      .then(
+        (response) => {
+          //    console.log(response.data.token);
+          //    localStorage.setItem('x-token',response.data.token)
+          //    getAllUser();
+          console.log(response);
+          window.location = "/dashboard";
+        },
+        (error) => {
+          alert("Incorrect username or password");
+          console.log(error);
+        }
+      );
+  } );
+}
 
-  const username = document.getElementById("username").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const passwordConfirm = document.getElementById("confirmPassword").value;
-  if (!username || !email || !passwordConfirm || !password) {
-    return alert("Please Enter complete information!!!");
-  }
-  axios
-    .post(`${url}/user/signup`, {
-     name: username,
-      email,
-      password,
-      passwordConfirm,
-    })
-    .then(
-      (response) => {
-        //    console.log(response.data.token);
-        //    localStorage.setItem('x-token',response.data.token)
-        //    getAllUser();
-        console.log(response);
-        window.location = "/dashboard";
-      },
-      (error) => {
-        alert("Incorrect username or password");
-        console.log(error);
-      }
-    );
-} );
 
 const getAllUser = async () => {
   try {

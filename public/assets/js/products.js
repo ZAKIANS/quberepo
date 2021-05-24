@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-const ss=document.querySeplectorAll('.delete')
+// const ss=document.querySeplectorAll('.delete')
 
-ss.forEach(e=>console.log(e.title));
+// ss.forEach(e=>console.log(e.title));
 
-console.log({ss});
+// console.log({ss});
 
     // const title=event.target.firstElementChild.innerHTML;
     // try {
