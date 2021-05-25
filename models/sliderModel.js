@@ -5,8 +5,10 @@ const sliderSchema = new mongoose.Schema({
     unique: [true, "Choose another title this is already exits"],
   },
   image:String,
-  active:Boolean,
+  active:{
+    type:Boolean,
+    default:true
+  },
 });
-
 const Slider = mongoose.model("Slider", sliderSchema);
 module.exports = Slider;

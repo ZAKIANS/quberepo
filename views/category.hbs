@@ -1,34 +1,34 @@
-		<!-- Main content -->
-		<div class="content-wrapper">
+<!-- Main content -->
+<div class="content-wrapper">
 
-			<!-- Page header -->
-			<div class="page-header page-header-light">
-				<div class="page-header-content header-elements-md-inline">
-					<div class="page-title d-flex">
-						<h4><i class="icon-list-unordered mr-2"></i> <span class="font-weight-semibold">Categories</span></h4>
-						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-					</div>
+	<!-- Page header -->
+	<div class="page-header page-header-light">
+		<div class="page-header-content header-elements-md-inline">
+			<div class="page-title d-flex">
+				<h4><i class="icon-list-unordered mr-2"></i> <span class="font-weight-semibold">Categories</span></h4>
+				<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+			</div>
 
-					<!-- <div class="header-elements d-none">
+			<!-- <div class="header-elements d-none">
 						<div class="d-flex justify-content-center">
 							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
 							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
 							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
 						</div>
 					</div> -->
+		</div>
+
+		<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+			<div class="d-flex">
+				<div class="breadcrumb">
+					<a href="dashboard" class="breadcrumb-item"><i class="icon-home4 mr-2"></i> Dashboard</a>
+					<span class="breadcrumb-item active">- All Categories</span>
 				</div>
 
-				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-					<div class="d-flex">
-						<div class="breadcrumb">
-							<a href="dashboard" class="breadcrumb-item"><i class="icon-home4 mr-2"></i> Dashboard</a>
-							<span class="breadcrumb-item active">-  All Categories</span>
-						</div>
+				<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+			</div>
 
-						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-					</div>
-
-					<!-- <div class="header-elements d-none">
+			<!-- <div class="header-elements d-none">
 						<div class="breadcrumb justify-content-center">
 							<a href="#" class="breadcrumb-elements-item">
 								<i class="icon-comment-discussion mr-2"></i>
@@ -51,64 +51,73 @@
 							</div>
 						</div>
 					</div> -->
-				</div>
-			</div>
-			<!-- /page header -->
-
-<!--Contant Area-->
-<section>
-    <div class="container">
-    
-        
-        <div class="h1 mt-4">
-            All Categories
-        </div>
-        <a href="addcategory" class="btn btn-warning float-right my-2">Add Category</a>
-        <div class="clearfix"></div>
-        <table class="table table-bordered table-hover table-condensed table-export" cellspacing="0" width="100%">
-            <thead class="bg-info">
-                <tr>
-                    <th>
-                        #
-                    </th>
-                    <th>
-                        Category Name
-                    </th>
-                    <th>
-                        Slug
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                   {{#each cate}}
-                    <tr>
-                        <td>
-                            1 							
-						</td>
-                        <td>
-                            {{this.category}}
-                        </td>
-                        <td>
-                            {{this.slug}}
-                        </td>
-                        <td class="text-right">
-                             {{#if this.static}}
-                             {{else}}
-                                <a   id="deleteItem" class="btn m-2 btn-circle btn-danger">Delete
-                             {{/if}}
-                            <a href="/addsubcategory?cate={{this.category}}" class="btn btn-circle btn-primary">Add SubCategory</a>
-                        </td>
-                    </tr>
-                    {{/each}}
-            </tbody>
-        </table>
-
-    </div>
-</section>  
- 
-<!--Contant Area-->
 		</div>
-		<!-- /main content -->
+	</div>
+	<!-- /page header -->
+
+	<!--Contant Area-->
+	<section>
+		<div class="container">
+
+
+			<div class="h1 mt-4">
+				All Categories
+			</div>
+			<a href="addcategory" class="btn btn-warning float-right my-2">Add Category</a>
+			<div class="clearfix"></div>
+			<table class="table table-bordered table-hover table-condensed table-export" cellspacing="0" width="100%">
+				<thead class="bg-info">
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							Category Name
+						</th>
+						<th>
+							SubCategories
+						</th>
+						<th>
+							Actions
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each cate}}
+					<tr>
+						<td >
+							1
+						</td>
+						<td >
+							{{this.category}}
+						</td>
+						<td class="col-lg-3">
+
+							<div class="row">
+								{{#each this.subCategory}}
+								<div class="col-lg-2 m-1 bg-primary text-white">
+									{{this.name}}
+								</div>
+								{{/each}}
+
+							</div>
+						</td>
+						<td class="text-right col-lg-4">
+							{{#if this.static}}
+							{{else}}
+							<a id="deleteItem" class="btn m-2 btn-circle btn-danger">Delete
+								{{/if}}
+								<a href="/addsubcategory?cate={{this.category}}" class="btn btn-circle btn-primary">Add
+									SubCategory</a>
+						</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+
+		</div>
+	</section>
+
+	<!--Contant Area-->
+</div>
+<!-- /main content -->

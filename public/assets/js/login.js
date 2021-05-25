@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 const url='https://qubanglestore.herokuapp.com';
-// const url='https://store.webzeco.com';
-
+// const url='https://store.webzeco.com'
 let g_category;
 let files = []; //This is multiple images
 let g_subCategory;
@@ -264,3 +263,40 @@ document.querySelector("#file-input").addEventListener("change", previewImages);
 // alert('helol9o');
 
 // document.forms["status"]["pending"].checked=true;
+// var deleteItem = function(title) {
+//   // Work with that value
+//   console.log(title); 
+// }
+async function deleteItem(title) {
+  try {
+    console.log(title); 
+    await axios.delete(`${url}/apk/deleteApk/${title}`);
+    window.location='/products';
+  } catch (error) {
+    alert('Something went wrong!!!')
+  }
+   
+  }
+  async function deleteItem(title) {
+    try {
+      console.log(title); 
+      await axios.delete(`${url}/apk/deleteApk/${title}`);
+      window.location='/products';
+    } catch (error) {
+      alert('Something went wrong!!!')
+    }
+     
+    }
+  async function approve(item) {
+    try {
+      if (item.actions==='pending') {
+        await axios.patch(`${url}/apk/updateactions`,{title:item.title,actions:"approved"});
+      }else{
+        await axios.patch(`${url}/apk/updateactions`,{title:item.title,actions:"pending"});
+      }
+      window.location='/products';
+    } catch (error) {
+      alert('Something went wrong!!!')
+    }
+    }
+  

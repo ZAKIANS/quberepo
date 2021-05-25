@@ -7,6 +7,7 @@ const handlebars = require("express-handlebars");
 const path=require('path')
 const hbr = require("handlebars");
 const cors=require('cors');
+// const morgan = require("morgan");
 
 app.set("view engine", "hbs");
 app.engine(
@@ -18,8 +19,10 @@ app.engine(
     extname: "hbs",
   })
 );
+
 app.use(express.json());
 app.use(cors({origin:true}));
+// app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname,"public")));
 app.use("/apk", apkRouts);
 app.use("/user", userRouts);
@@ -86,8 +89,16 @@ console.log({role});
     <p>${status}</p>
   </td>
   `
-  }  
- 
-  
+  }    
+});
+hbr.registerHelper('json', function(context) {
+  return JSON.stringify(context).replace(/"/g, '&quot;');
+});
+hbr.registerHelper('check', function(item) {
+if (item.actions==='approved') {
+  return `checked`;
+} else {
+  return null;
+}
 });
 module.exports = app;

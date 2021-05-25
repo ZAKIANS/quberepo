@@ -23,7 +23,7 @@ const apkSchema = new mongoose.Schema(
     creator: String,
     actions: {
       type: String,
-      enum: ["pending", "approved", "rejected"],
+      enum: ["pending", "approved"],
       default: "pending",
     },
     trending: {

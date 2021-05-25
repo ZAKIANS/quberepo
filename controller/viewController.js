@@ -39,11 +39,12 @@ exports.signin= (req, res) => {
   if (role==='admin'){
     products=await Apk.find().lean();
     admin.role=true;
+    res.render("products",{products,admin});
   } 
   else if(role==='user'){
     products=await Apk.find({creator:name}).lean();
+    res.render("userProducts",{products,admin});
   } 
-    res.render("products",{products,admin});
   });
 exports.home=catchAsync(async (req, res) => {
     res.render("home");

@@ -231,6 +231,8 @@ exports.addCategory = catchAsync(async (req, res) => {
   // const apk = await Category.find();
   // const names = apk.map((e) => e.category.name);
 });
+
+
 exports.addSubCategory = catchAsync(async (req, res) => {
   console.log(req.body);
   const { cate } = req.params;
