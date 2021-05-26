@@ -85,30 +85,22 @@
 				<tbody>
 					{{#each cate}}
 					<tr>
-						<td >
+						<td>
 							1
 						</td>
-						<td >
+						<td>
 							{{this.category}}
 						</td>
-						<td class="col-lg-3">
-
-							<div class="row">
-								{{#each this.subCategory}}
-								<div class="col-lg-2 m-1 bg-primary text-white">
-									{{this.name}}
-								</div>
-								{{/each}}
-
-							</div>
+						<td>
+							<div>{{this.slug}}</div>
 						</td>
-						<td class="text-right col-lg-4">
+						<td class="text-right">
 							{{#if this.static}}
 							{{else}}
-							<a id="deleteItem" class="btn m-2 btn-circle btn-danger">Delete
+							<a id="deleteItem"   onclick="deletecate({{{json this.category}}})"  class="btn m-2 btn-circle btn-danger">Delete</a>
 								{{/if}}
-								<a href="/addsubcategory?cate={{this.category}}" class="btn btn-circle btn-primary">Add
-									SubCategory</a>
+								<a href="/subcategory?cate={{this.category}}" class="btn btn-circle btn-primary">
+									SubCategories</a>
 						</td>
 					</tr>
 					{{/each}}
@@ -120,4 +112,5 @@
 
 	<!--Contant Area-->
 </div>
+<script src="/assets/js/cate.js"></script>
 <!-- /main content -->

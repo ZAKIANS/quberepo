@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
-const url='https://qubanglestore.herokuapp.com';
-// const url='https://store.webzeco.com'
+let url='https://qubanglestore.herokuapp.com';
+// let url='https://store.webzeco.com'
 let g_category;
 let files = []; //This is multiple images
 let g_subCategory;
-// const url = "http://localhost:8080";
+// let url = "http://localhost:8080";
 function login() {
   const name = document.getElementById("inputUsername").value;
   const password = document.getElementById("inputPassword").value;
@@ -18,9 +18,6 @@ function login() {
     })
     .then(
       (response) => {
-        //    console.log(response.data.token);
-        //    localStorage.setItem('x-token',response.data.token)
-        //    getAllUser();
         console.log(response);
         window.location = "/dashboard";
       },
@@ -104,20 +101,20 @@ const getAllCate = async () => {
   }
 };
 
-const addCate = async () => {
-  const cate = document.getElementById("newCate").value;
-  const slug = document.getElementById("newSlug").value;
-  try {
-    const allCate = await axios.post(`${url}/apk/addCate`, {
-      category: cate,
-      slug: slug,
-    });
-    console.log({ allCate });
-    window.location = "/category";
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const addCate = async () => {
+//   const cate = document.getElementById("newCate").value;
+//   const slug = document.getElementById("newSlug").value;
+//   try {
+//     const allCate = await axios.post(`${url}/apk/addCate`, {
+//       category: cate,
+//       slug: slug,
+//     });
+//     console.log({ allCate });
+//     window.location = "/category";
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const getAllApks = async () => {
   try {
@@ -139,34 +136,35 @@ const onsubCateSelect = async () => {
   console.log({ g_category, g_subCategory });
 };
 const selectElement = document.querySelector("#cat_id");
-
-selectElement.addEventListener("change", async (event) => {
-  try {
-    const { data } = await axios.get(
-      `${url}/apk/getcategory/${
-        selectElement.options[selectElement.selectedIndex].label
-      }`
-    );
-    g_category = data.data.category;
-    const list = data.data.subCategory;
-    var cont = document.getElementById("subcategory");
-    var op = document.createElement("option");
-    op.innerHTML = "select ..."; // assigning text to li using array value.
-    removeAllChildNodes(cont);
-    cont.appendChild(op); // append li to ul.
-    for (i = 0; i <= list.length - 1; i++) {
-      var option = document.createElement("option");
-      option.innerHTML = list[i].name; // assigning text to li using array value.
-      option.setAttribute("value", list[i].name);
-      cont.appendChild(option); // append li to ul.
+if (selectElement) {
+  selectElement.addEventListener("change", async (event) => {
+    try {
+      const { data } = await axios.get(
+        `${url}/apk/getcategory/${
+          selectElement.options[selectElement.selectedIndex].label
+        }`
+      );
+      g_category = data.data.category;
+      const list = data.data.subCategory;
+      var cont = document.getElementById("subcategory");
+      var op = document.createElement("option");
+      op.innerHTML = "select ..."; // assigning text to li using array value.
+      removeAllChildNodes(cont);
+      cont.appendChild(op); // append li to ul.
+      for (i = 0; i <= list.length - 1; i++) {
+        var option = document.createElement("option");
+        option.innerHTML = list[i].name; // assigning text to li using array value.
+        option.setAttribute("value", list[i].name);
+        cont.appendChild(option); // append li to ul.
+      }
+  
+      //   const cate = await axios.get(`${url}/cate/allcate`);
+      //   console.log({cate});
+    } catch (error) {
+      console.log(error);
     }
-
-    //   const cate = await axios.get(`${url}/cate/allcate`);
-    //   console.log({cate});
-  } catch (error) {
-    console.log(error);
-  }
-});
+  });
+}
 const onCateSelect = async () => {};
 
 function removeAllChildNodes(parent) {
@@ -202,6 +200,24 @@ const addApk = async () => {
   formData.append("description", description);
   // formData.append("website", website);
   formData.append("image", image);
+  const configImages = {
+    onUploadProgress: function(progressEvent) {
+      var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+      console.log(percentCompleted)
+        var dragonHealth = document.getElementById("health1").value;
+        console.log(dragonHealth);
+          document.getElementById("health1").value = percentCompleted;
+    }
+  }
+  const configApk = {
+    onUploadProgress: function(progressEvent) {
+      var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+      console.log(percentCompleted)
+        var dragonHealth = document.getElementById("health1").value;
+        console.log(dragonHealth);
+          document.getElementById("health2").value = percentCompleted;
+    }
+  }
   try {
     const rs1 = await axios.post(`${url}/apk/addApk`, formData);
     console.log({ rs1 });
@@ -210,11 +226,11 @@ const addApk = async () => {
     for (var x = 0; x < ins; x++) {
       fd.append("images", files[x]);
     }
-    const rs2 = await axios.patch(`${url}/apk/addApkImages/${title}`, fd);
+    const rs2 = await axios.patch(`${url}/apk/addApkImages/${title}`, fd,configImages);
     console.log({ rs2 });
     const fileData = new FormData();
     fileData.append("file", file);
-    const rs3 = await axios.patch(`${url}/apk/addApkFile/${title}`, fileData);
+    const rs3 = await axios.patch(`${url}/apk/addApkFile/${title}`, fileData,configApk);
     console.log({ rs3 });
 
     // console.log({result,datas});
@@ -275,18 +291,8 @@ async function deleteItem(title) {
   } catch (error) {
     alert('Something went wrong!!!')
   }
-   
   }
-  async function deleteItem(title) {
-    try {
-      console.log(title); 
-      await axios.delete(`${url}/apk/deleteApk/${title}`);
-      window.location='/products';
-    } catch (error) {
-      alert('Something went wrong!!!')
-    }
-     
-    }
+
   async function approve(item) {
     try {
       if (item.actions==='pending') {

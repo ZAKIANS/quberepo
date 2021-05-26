@@ -21,7 +21,7 @@ Router.patch(
   apkController.uploadFile,
   apkController.uploadFileHandler
 );
-
+Router.delete('/deletesubcate/:cate',apkController.deleteSubcategory);
 Router.patch(
   "/addApkImages/:title",
   apkController.uploadMultiImages.array("images", 10),
@@ -50,6 +50,10 @@ Router.patch(
   "/addSubCate/:cate",
   apkController.uploadImage,
   apkController.addSubCategory
+);
+Router.get(
+  "/subcate/:cate",
+  apkController.getSubcategories
 );
 Router.delete("/deleteCate/:cate", apkController.removeCategory);
 

@@ -46,6 +46,9 @@ exports.signin= (req, res) => {
     res.render("userProducts",{products,admin});
   } 
   });
+  exports.subcategory=catchAsync(async (req, res) => {
+    res.render("subcategory");
+  });
 exports.home=catchAsync(async (req, res) => {
     res.render("home");
   });

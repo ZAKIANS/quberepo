@@ -232,7 +232,17 @@ exports.addCategory = catchAsync(async (req, res) => {
   // const names = apk.map((e) => e.category.name);
 });
 
-
+exports.getSubcategories=catchAsync(async (req, res) => {
+  const data = await Category.findOne({category:req.params.cate});
+  res.status(200).json({ data });
+});
+exports.deleteSubcategory=catchAsync(async (req, res) => {
+  const data = await Category.findOne({category:req.params.cate});
+  const rmc=data.subCategory.filter(d=>d.name!==req.body.name);
+  // console.log({name:req.body.name});
+  await Category.findOneAndUpdate({category:req.params.cate},{subCategory:rmc});
+  res.status(200).json({ data ,rmc});
+});
 exports.addSubCategory = catchAsync(async (req, res) => {
   console.log(req.body);
   const { cate } = req.params;
