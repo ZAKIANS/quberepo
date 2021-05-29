@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
-let url='https://qubanglestore.herokuapp.com';
+//let url='https://qubanglestore.herokuapp.com';
 // let url='https://store.webzeco.com'
 let g_category;
 let files = []; //This is multiple images
 let g_subCategory;
-// let url = "http://localhost:8080";
+ let url = "http://localhost:3000";
 function login() {
   const name = document.getElementById("inputUsername").value;
   const password = document.getElementById("inputPassword").value;
