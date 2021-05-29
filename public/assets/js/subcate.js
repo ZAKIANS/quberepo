@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // let url = "http://localhost:8080";
-let url='https://qubanglestore.herokuapp.com';
-
+//let url='https://qubanglestore.herokuapp.com';
+ let url = "http://localhost:3000";
 const params = new URLSearchParams(window.location.search);
 const cate = params.get("cate");
 const allsubcate = async () => {
